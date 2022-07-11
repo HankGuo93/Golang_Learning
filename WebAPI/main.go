@@ -18,9 +18,19 @@ func test(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", data)
 }
 
+func LoginPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "login.html", nil)
+}
+
+func LoginAuth(c *gin.Context) {
+
+}
+
 func main() {
 	server := gin.Default()
-	server.LoadHTMLGlob("template/*")
+	server.LoadHTMLGlob("template/html/*")
+	server.Static("/assets", "./template/assets")
 	server.GET("/", test)
-	server.Run(":8888")
+	server.GET("/login", LoginPage)
+	server.Run("0.0.0.0:8080")
 }
